@@ -13,6 +13,7 @@
 # comment out last line if you do not want output to screen
 
 import glob
+from datetime import datetime
 import sys
 import calendar
 import numpy as np
@@ -488,6 +489,9 @@ x = list(matplotlib.cbook.flatten(timeaxis))
 y = list(matplotlib.cbook.flatten(height))
 col = list(matplotlib.cbook.flatten(ff))
 
+today = datetime.now()
+now = today.hour + today.minute / 60
+
 # plotting
 
 title = 'Ramfjordmoen Digisonde ' + calendar.month_name[month] + ' ' + str(day_of_month) + ' ' + str(year)
@@ -496,6 +500,8 @@ fig, ax = plt.subplots()
 
 cm = plt.cm.get_cmap('jet')
 sc = plt.scatter(x, y, c=col, marker="_", s=22, cmap=cm)
+if (year == today.year) and (month == today.month) and (day_of_month == today.day):
+    plt.axvline(now, color='grey', alpha=0.5)
 ax.grid(True, which='both')
 ax.set_xlim(0, 24)
 ax.set_ylim(0, 800)

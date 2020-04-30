@@ -469,8 +469,8 @@ x = list(matplotlib.cbook.flatten(timeaxis))
 y = list(matplotlib.cbook.flatten(height))
 freq = list(matplotlib.cbook.flatten(ff))
 
-now = datetime.now()
-now = now.hour + now.minute / 60
+today = datetime.now()
+now = today.hour + today.minute / 60
 
 # convert from frequency to number of electrons per cubic meter
 col = []
@@ -479,13 +479,14 @@ for ix in range(len(freq)):
 
 # plotting
 
-title = 'Ramfjordmoen Digisonde ' + calendar.month_name[month] + ' ' + str(day_of_month) + ' ' + str(year)
+title = 'Ramfjordmoen Digisonde electron density ' + calendar.month_name[month] + ' ' + str(day_of_month) + ' ' + str(year)
 
 fig, ax = plt.subplots()
 
 cm = plt.cm.get_cmap('jet')
 sc = plt.scatter(x, y, c=col, marker="s", s=14, cmap=cm)
-plt.axvline(now, color='grey', alpha=0.5)
+if (year == today.year) and (month == today.month) and (day_of_month == today.day):
+    plt.axvline(now, color='grey', alpha=0.5)
 ax.grid(True, which='both')
 ax.set_xlim(0, 24)
 ax.set_ylim(0, 800)
