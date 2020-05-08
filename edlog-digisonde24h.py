@@ -12,6 +12,7 @@
 # comment out last line if you do not want output to screen
 
 import glob
+import math
 import sys
 from datetime import datetime
 import calendar
@@ -475,7 +476,7 @@ now = today.hour + today.minute / 60
 # convert from frequency to number of electrons per cubic meter
 col = []
 for ix in range(len(freq)):
-    col.append((freq[ix] * 1e6) * (freq[ix] * 1000000) / 81.)
+    col.append(math.log10((freq[ix] * 1e6) * (freq[ix] * 1000000) / 81.))
 
 # plotting
 
@@ -488,12 +489,13 @@ title = 'Ramfjordmoen Digisonde electron density ' + calendar.month_name[month] 
 fig, ax = plt.subplots()
 
 cm = plt.cm.get_cmap('jet')
-sc = plt.scatter(x, y, c=col, marker="s", s=14, cmap=cm)
+sc = plt.scatter(x, y, c=col, marker="s", s=24, cmap=cm)
+# sc = plt.pcolormesh(x, y, col, cmap=cm) # this will fail..
 if (year == today.year) and (month == today.month) and (day_of_month == today.day):
     plt.axvline(now, color='grey', alpha=0.5)
 ax.grid(True, which='both')
 ax.set_xlim(0, 24)
-ax.set_ylim(0, 800)
+ax.set_ylim(0, 400)
 ax.set_title(title)
 ax.set_xlabel('Universal Time')
 ax.set_ylabel('Altitude (km)')
