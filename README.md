@@ -9,6 +9,9 @@ python digisonde24h.py data/TR169_YYYYDDD <output>
 Stacked electron density:
 python ed-digisonde24h.py data/TR169_YYYYDDD <output>
 
+Stacked electron density logaritmic:
+python edlog-digisonde24h.py data/TR169_YYYYDDD <output>
+
 directory = path to the digisonde data
 YYYY = year
 DDD = the day number of the year
