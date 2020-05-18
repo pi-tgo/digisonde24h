@@ -499,6 +499,7 @@ ax.set_ylim(0, 400)
 ax.set_title(title)
 ax.set_xlabel('Universal Time')
 ax.set_ylabel('Altitude (km)')
+plt.clim(vmin=10)
 cbar = plt.colorbar(sc)
 cbar.set_label('Electrons per cubic meter (log10)')
 
