@@ -31,7 +31,12 @@ def read_group(group_number, length_of_element):
     for index in range(int(num_elements[group_number - 1])):
         if (index != 0) and ((index % round(120 / length_of_element)) == 0):
             f.read(2)
-        group[index] = f.read(length_of_element)
+        # changed June 16th 2020 due to data file containing 'Infinit' instead of numbers in group 4 (scaled ionospheric..)
+        temporary = f.read(length_of_element)
+        if temporary.decode("utf-8") == ' Infinit':
+            group[index] = b'9999.000'
+        else:
+            group[index] = temporary
     if int(num_elements[group_number - 1]) != 0:
         f.read(2)
     return group
