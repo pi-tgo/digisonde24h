@@ -481,7 +481,7 @@ now = today.hour + today.minute / 60
 # convert from frequency to number of electrons per cubic meter
 col = []
 for ix in range(len(freq)):
-    col.append(math.log10((freq[ix] * 1e6) * (freq[ix] * 1000000) / 81.))
+    col.append(math.log10((freq[ix] * 1e6) ** 2. / 81.))
 
 # plotting
 
